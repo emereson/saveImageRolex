@@ -16,7 +16,7 @@ app.use(
   })
 );
 
-const port = 3001;
+const port = 3111;
 
 app.post('/upload', upload.single('sectionImg'), uploadImage);
 app.delete('/delete-image/:id', deleteImage);
