@@ -1,7 +1,6 @@
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
-import fs from 'fs';
 import { uploadImage, deleteImage } from './controllers/imageController.js';
 import { deleteVideo, saveVideo } from './controllers/videoController.js';
 import { uploadVideo } from './utils/video.multer.js';
@@ -17,7 +16,8 @@ app.use(
   })
 );
 
-const port = 3111;
+const port = process.env.PORT || 3111;
+
 
 app.post('/upload', upload.single('sectionImg'), uploadImage);
 app.delete('/delete-image/:id', deleteImage);
@@ -26,6 +26,11 @@ app.delete('/delete-video/:id', deleteVideo);
 
 app.use('/uploads', express.static('./uploads'));
 app.use('/videos', express.static('./videos'));
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
+});
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port} ❤`);
