@@ -8,6 +8,7 @@ import { uploadVideo } from './utils/video.multer.js';
 import { upload } from './utils/image.multer.js';
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
 app.use(
