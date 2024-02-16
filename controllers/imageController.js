@@ -11,10 +11,7 @@ export const uploadImage = (req, res) => {
       });
     }
 
-    const host = req.get('host');
-    const protocol = req.protocol;
-
-    const imagePath = `${protocol}://${host}/uploads/${req.file.filename}`;
+    const imagePath = `uploads/${req.file.filename}`;
 
     res.status(200).json({
       status: 'success',

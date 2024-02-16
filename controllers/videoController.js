@@ -10,10 +10,9 @@ export const saveVideo= (req, res) => {
       });
     }
 
-    const host = req.get('host');
-    const protocol = req.protocol;
 
-    const videoPath = `${protocol}://${host}/videos/${req.file.filename}`;
+
+    const videoPath = `videos/${req.file.filename}`;
 
     res.status(200).json({
       status: 'success',
@@ -33,7 +32,7 @@ export const saveVideo= (req, res) => {
 export const deleteVideo = (req, res) => {
   const { id } = req.params;
   const videoPath = `./videos/${id}`;
-  console.log(id);
+
 
   if (fs.existsSync(videoPath)) {
     try {
